@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Official website of Tacurong National High School" />
+<title>Tacurong National High School</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* DepEd-inspired colors */
+  --primary:#0b4fa2;
+  --secondary:#c62828;
+  --accent:#f9a825;
+  --light:#f4f6f9;
+  --dark:#1f2933;
+  --radius:14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Roboto',sans-serif;
+  color:var(--dark);
+  background:var(--light);
+  line-height:1.7;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* CLICKABLE CARDS */
+.card-link{display:block}
+.card-link .card{cursor:pointer}
+.card-link .card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18)}
+
+/* ===== NAVBAR ===== */
+header{
+  position:sticky;top:0;z-index:1000;
+  background:linear-gradient(90deg,var(--primary),#083b7a);
+}
+.navbar{
+  max-width:1200px;margin:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;color:#fff;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:50%;padding:4px}
+.brand span{font-size:1.3rem;font-weight:700;line-height:1.2}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{padding:8px 14px;border-radius:8px;font-weight:500;transition:.3s}
+.nav-links a:hover{background:var(--accent);color:var(--primary)}
+
+.dropdown{position:relative}
+.dropdown-menu{position:absolute;top:42px;left:0;min-width:170px;background:#fff;color:var(--dark);border-radius:10px;box-shadow:0 12px 25px rgba(0,0,0,.15);display:none;overflow:hidden}
+.dropdown-menu a{display:block;padding:12px 15px;font-size:.95rem}
+.dropdown-menu a:hover{background:var(--light)}
+/* dropdown opens on click instead of hover to prevent disappearing */
+.dropdown.open .dropdown-menu{display:block}
+
+.hero{position:relative;height:100vh;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,79,162,.75),rgba(0,0,0,.5));z-index:1}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
+.hero-slide.active{opacity:1}
+.hero-content{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:0 20px}
+.hero-content h1{font-size:clamp(2.2rem,5vw,3.8rem);margin-bottom:16px}
+.hero-content p{font-size:clamp(1.1rem,2.5vw,1.4rem);max-width:720px}
+.hero-content .btn{margin-top:28px}
+
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;transition:.3s}
+.hero-arrow:hover{background:rgba(255,255,255,.6)}
+.hero-arrow.left{left:30px}
+.hero-arrow.right{right:30px}
+
+section{padding:90px 20px}
+.container{max-width:1200px;margin:auto}
+.section-title{text-align:center;margin-bottom:50px}
+.section-title h2{font-size:2.4rem;color:var(--primary)}
+.section-title p{max-width:650px;margin:12px auto 0}
+
+.grid{display:grid;gap:28px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:0 15px 30px rgba(0,0,0,.08);transition:.35s;opacity:0;transform:translateY(40px)}
+.card.show{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-10px)}
+.card h3,.card h4{color:var(--primary);margin-bottom:12px}
+
+.news-card img{border-radius:10px;margin-bottom:15px;height:180px;object-fit:cover}
+.news-card .date{font-size:.85rem;color:var(--secondary);font-weight:600;margin-bottom:6px}
+
+.btn{display:inline-block;padding:12px 26px;background:var(--primary);color:#fff;border-radius:30px;font-weight:600;transition:.3s}
+.btn:hover{background:var(--accent);color:var(--primary)}
+
+.strands-wrap{display:grid;grid-template-columns:220px 1fr;gap:40px}
+.side-nav{position:sticky;top:140px;display:flex;flex-direction:column;gap:14px}
+.side-nav a{padding:12px 16px;border-radius:10px;background:var(--primary);color:#fff;font-weight:500;transition:.3s}
+.side-nav a.active,.side-nav a:hover{background:var(--accent);color:var(--primary)}
+
+footer{background:#072f63;color:#fff;padding:40px 20px;text-align:center}
+footer a{color:var(--accent);font-weight:600}
+
+@media(max-width:900px){.strands-wrap{grid-template-columns:1fr}.side-nav{display:none}}
+@media(max-width:768px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="brand">
+      <!-- SCHOOL LOGO -->
+      <img src="images/tnhs.jpg" alt="Tacurong National High School Logo">
+      <span>Tacurong<br>National High School</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li class="dropdown" id="navStrands">
+        <a href="#" id="strandsToggle">Strands ▾</a>
+        <div class="dropdown-menu">
+          <a href="https://www.facebook.com/profile.php?id=100090053783134">HUMSS</a>
+          <a href="https://www.facebook.com/stemtnhsshs">STEM</a>
+          <a href="https://www.facebook.com/profile.php?id=61562839784024">HE</a>
+          <a href="https://www.facebook.com/profile.php?id=100095293807767">ABM</a>
+          <a href="https://www.facebook.com/profile.php?id=61551051885149">ICT</a>
+        </div>
+      </li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slide active" style="background-image:url('images/505370048_1126486759498535_3511503922221071489_n.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('images/e.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('images/2.jpg')"></div>
+
+  <div class="hero-content">
+    <h1>Welcome to Tacurong National High School</h1>
+    <p>Quality, accessible, and relevant education aligned with the ideals of the Department of Education.</p>
+    <a href="#programs" class="btn">Explore Programs</a>
+  </div>
+
+  <div class="hero-arrow left">❮</div>
+  <div class="hero-arrow right">❯</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>About Us</h2>
+      <p>Tacurong National High School is a public secondary school committed to DepEd’s mission of delivering quality basic education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="container">
+    <div class="section-title">
+      <h2>News & Announcements</h2>
+      <p>Latest updates, activities, and official announcements from the school.</p>
+    </div>
+    <div class="grid grid-3">
+      <a href="https://www.facebook.com/share/p/1Byi8XcCsM/" target="_blank" class="card-link"><div class="card news-card">
+        <img src="images/brigada.png" alt="News image">
+        <div class="date">June 9, 2025</div>
+        <h4>School Opening of Classes</h4>
+        <p>Official opening of classes for School Year 2025–2026.</p>
+      </div>
+      <a href="https://www.facebook.com/share/p/1FBwPZAMe5/" target="_blank" class="card-link"><div class="card news-card">
+        <img src="images/opening.jpg" alt="Announcement image">
+        <div class="date">June 16, 2025</div>
+        <h4>Brigada Eskwela</h4>
+        <p>Community-driven school preparation activity led by teachers and parents.</p>
+      </div>
+      
+      <a href="https://www.facebook.com/share/p/1C2RZm5PeJ/" target="_blank" class="card-link"><div class="card news-card">
+        <img src="images/arh.jpg" alt="ARH Symposium">
+        <div class="date">December 2 and 12, 2025</div>
+        <h4>ARH Symposium</h4>
+        <p>An academic and research-based symposium promoting health, leadership, and responsible citizenship.</p>
+      </div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="container">
+    <div class="section-title">
+      <h2>Academic Programs</h2>
+      <p>Junior and Senior High School programs offered by Tacurong National High School.</p>
+    </div>
+<div class="grid grid-3">
+
+  <!-- Junior High -->
+  <a href="https://www.facebook.com/profile.php?id=100064116640822"
+     target="_blank" class="card-link">
+    <div class="card">
+      <img src="images/tnhs.jpg" alt="Junior High School"
+           style="border-radius:10px;margin-bottom:15px;height:180px;object-fit:cover">
+      <h3>Junior High School (Regular)</h3>
+      <p>Comprehensive secondary education for Grades 7–10 focusing on core competencies and values formation.</p>
+    </div>
+  </a>
+
+  <!-- STE -->
+  <a href="https://www.facebook.com/STEPTNHSOFFICIAL"
+     target="_blank" class="card-link">
+    <div class="card">
+      <img src="images/ste.png" alt="STE Program"
+           style="border-radius:10px;margin-bottom:15px;height:180px;object-fit:cover">
+      <h3>STE Program</h3>
+      <p>Science, Technology, and Engineering education for academically inclined learners.</p>
+    </div>
+  </a>
+
+  <!-- SPA (NOW SIDE-BY-SIDE WITH STE) -->
+  <a href="https://www.facebook.com/profile.php?id=61578151003216"
+     target="_blank" class="card-link">
+    <div class="card">
+      <img src="images/spa.png" alt="SPA Program"
+           style="border-radius:10px;margin-bottom:15px;height:180px;object-fit:cover">
+      <h3>SPA Program</h3>
+      <p>Special Program in the Arts nurturing creativity and cultural appreciation.</p>
+    </div>
+  </a>
+
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRANDS -->
+<section id="strands">
+  <div class="container">
+    <div class="section-title"><h2>Senior High School Strands</h2></div>
+    <div class="strands-wrap">
+      <div class="side-nav">
+        <a href="#humss" class="side-link active">HUMSS</a>
+        <a href="#stem" class="side-link">STEM</a>
+        <a href="#he" class="side-link">HE</a>
+        <a href="#abm" class="side-link">ABM</a>
+        <a href="#ict" class="side-link">ICT</a>
+      </div>
+      <div class="grid grid-4">
+        <a href="https://www.facebook.com/profile.php?id=100090053783134" class="card-link"><div class="card" id="humss">
+          <img src="images/humms.jpg" alt="HUMSS" style="border-radius:10px;margin-bottom:15px;height:160px;object-fit:cover">
+          <h4>HUMSS</h4>
+          <p>Humanities and Social Sciences.</p>
+        </div></a>
+
+        <a href="https://www.facebook.com/stemtnhsshs" class="card-link"><div class="card" id="stem">
+          <img src="images/stem.jpg" alt="STEM" style="border-radius:10px;margin-bottom:15px;height:160px;object-fit:cover">
+          <h4>STEM</h4>
+          <p>Science, Technology, Engineering, and Mathematics.</p>
+        </div></a>
+
+        <a href="https://www.facebook.com/profile.php?id=61562839784024" class="card-link"><div class="card" id="he">
+          <img src="images/he.jpg" alt="Home Economics" style="border-radius:10px;margin-bottom:15px;height:160px;object-fit:cover">
+          <h4>HE</h4>
+          <p>Home Economics strand.</p>
+        </div></a>
+
+        <a href="https://www.facebook.com/profile.php?id=100095293807767" class="card-link"><div class="card" id="abm">
+          <img src="images/abm.png" alt="ABM" style="border-radius:10px;margin-bottom:15px;height:160px;object-fit:cover">
+          <h4>ABM</h4>
+          <p>Accountancy, Business, and Management.</p>
+        </div></a>
+        <a href="https://www.facebook.com/profile.php?id=61551051885149" class="card-link"><div class="card" id="ict">
+          <img src="images/ict.jpg" alt="/ICT" style="border-radius:10px;margin-bottom:15px;height:160px;object-fit:cover">
+          <h4>ICT</h4>
+          <p>Information and Communication Technologies.</p>
+        </div>
+      </div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FACULTY & STAFF -->
+<section id="faculty">
+  <div class="container">
+    <div class="section-title">
+      <h2>Faculty & Staff</h2>
+      <p>Dedicated educators and personnel committed to quality public education.</p>
+    </div>
+    <div class="grid grid-4">
+      <div class="card">
+        <img src="images/sirmartinpogi.png" alt="Faculty" style="border-radius:50%;height:160px;width:160px;object-fit:cover;margin:0 auto 15px">
+        <h4>Martin I. Diaz</h4>
+        <p>Principal III</p>
+      </div>
+      <div class="card">
+        <img src="images/esterrr.png" alt="Faculty" style="border-radius:50%;height:160px;width:160px;object-fit:cover;margin:0 auto 15px">
+        <h4>Ester Moreno</h4>
+        <p>Assistant Principal</p>
+      </div>
+      <div class="card">
+        <img src="images/faculty3.jpg" alt="Faculty" style="border-radius:50%;height:160px;width:160px;object-fit:cover;margin:0 auto 15px">
+        <h4>Teacher II</h4>
+        <p>Senior High School</p>
+      </div>
+      <div class="card">
+        <img src="images/staff1.jpg" alt="Staff" style="border-radius:50%;height:160px;width:160px;object-fit:cover;margin:0 auto 15px">
+        <h4>Administrative Staff</h4>
+        <p>School Office</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <p><strong>Department of Education</strong></p>
+    <p>Region XII – SOCCSKSARGEN<br>
+    Division of Tacurong City</p>
+    <p>Tacurong National High School</p>
+    <p>© 2025 All Rights Reserved</p>
+    <p>Email: <a href="mailto:info@tnhs.edu.ph">info@tnhs.edu.ph</a></p>
+  </div>
+</footer>
+
+<script>
+// HERO SLIDER
+const slides=document.querySelectorAll('.hero-slide');
+let index=0;
+const show=i=>{slides.forEach(s=>s.classList.remove('active'));slides[i].classList.add('active');}
+document.querySelector('.hero-arrow.right').onclick=()=>{index=(index+1)%slides.length;show(index)}
+document.querySelector('.hero-arrow.left').onclick=()=>{index=(index-1+slides.length)%slides.length;show(index)}
+setInterval(()=>{index=(index+1)%slides.length;show(index)},5000);
+
+// CARD ANIMATION
+const cards=document.querySelectorAll('.card');
+const reveal=()=>{
+  const trigger=window.innerHeight*0.85;
+  cards.forEach(c=>{if(c.getBoundingClientRect().top<trigger)c.classList.add('show')})
+}
+window.addEventListener('scroll',reveal);reveal();
+
+// NAV DROPDOWN CLICK FIX
+const toggle=document.getElementById('strandsToggle');
+const navDrop=document.getElementById('navStrands');
+if(toggle){
+  toggle.addEventListener('click',e=>{
+    e.preventDefault();
+    navDrop.classList.toggle('open');
+  });
+}
+
+const ids=['humss','stem','he','abm','ict'];
+window.addEventListener('scroll',()=>{
+  let pos=window.scrollY+220;
+  ids.forEach(id=>{
+    const sec=document.getElementById(id);
+    if(pos>=sec.offsetTop && pos<sec.offsetTop+sec.offsetHeight){
+      links.forEach(l=>l.classList.remove('active'));
+      document.querySelector(`.side-link[href="#${id}"]`).classList.add('active');
+    }
+  })
+});
+</script>
+</body>
+</html>

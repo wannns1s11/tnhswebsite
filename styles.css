@@ -1,0 +1,291 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* General */
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+header {
+    background-color: #005f73;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    background-color: #0a9396;
+    padding: 0.5rem 0;
+}
+
+header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #94d2bd;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px;
+}
+
+/* Hero Slider */
+.hero-slider {
+    position: relative;
+    overflow: hidden;
+    height: 90vh;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-text {
+    color: white;
+    text-align: center;
+    background-color: rgba(0,0,0,0.4);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.slide h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.slide p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.slider-controls span {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    padding: 0 20px;
+    user-select: none;
+}
+
+/* Buttons */
+.btn {
+    background-color: #ee9b00;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #ca6702;
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #005f73;
+}
+
+/* Counters */
+.counters {
+    background-color: #94d2bd;
+    color: #003049;
+}
+
+.counter-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.counter-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.counter-card p {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+/* Academics Cards */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #e0fbfc;
+    color: #003049;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* News Ticker */
+.news-ticker {
+    background-color: #ee9b00;
+    color: white;
+    padding: 1rem;
+}
+
+.ticker p {
+    animation: ticker 15s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes ticker {
+    0% {transform: translateX(100%);}
+    100% {transform: translateX(-100%);}
+}
+
+/* Contact Form */
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: auto;
+}
+
+.contact input, .contact textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.contact button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #005f73;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact button:hover {
+    background-color: #0a9396;
+}
+
+/* Footer */
+footer {
+    background-color: #003049;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    header nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #005f73;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+    }
+
+    header nav ul.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .cards, .counter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
